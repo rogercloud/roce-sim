@@ -1,0 +1,19 @@
+side_1: 
+  - name: prepare
+    mr_len: 1024
+  - name: connect_qp
+  - name: local_write
+    offset: 0
+    content: 'ff'
+  - name: barrier
+side_2:
+  - name: prepare
+  - name: connect_qp
+  - name: barrier
+  - name: remote_read
+    len: 1
+    remote_offset: 1024
+  - name: recv_pkt
+  - name: local_check
+    offset: 0
+    expected: 'ff'
